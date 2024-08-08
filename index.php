@@ -35,7 +35,7 @@ if ($file) {
     $current_time = date('d-m-Y H:i:s');
     fwrite($file, $current_time . " - New log entry\n");
     fclose($file);
-    echo "Log entry written successfully.\n";
+    echo $current_time . " - New log entry\n";
 } else {
     echo "Failed to open the file.";
 }
