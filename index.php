@@ -12,7 +12,8 @@ $sunriseEnd = (new DateTime())->setTimestamp($sunInfo['sunrise'] + 1800); // Sun
 $sunsetStart = (new DateTime())->setTimestamp($sunInfo['sunset'] - 1800); // Sunset starts 30 minutes before actual sunset
 
     $yee = new Yeelight("192.168.1.14", 55443);
-    $status = $yee->get_prop("power")->commit();
+$yee->set_power("on"); // power on
+$status = $yee->get_prop("power")->commit();
     print_r($status);
 
     $yee->disconnect();
