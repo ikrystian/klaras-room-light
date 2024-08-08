@@ -14,7 +14,7 @@ $sunsetStart = (new DateTime())->setTimestamp($sunInfo['sunset'] - 1800); // Sun
     $yee = new Yeelight("192.168.1.14", 55443);
 $yee->set_power("on"); // power on
 $status = $yee->get_prop("power")->commit();
-    print_r($status);
+    echo($yee->get_prop("power"));
 
     $yee->disconnect();
 //if ($currentDateTime >= $sunrise && $currentDateTime <= $sunriseEnd) {
