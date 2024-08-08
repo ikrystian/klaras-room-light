@@ -11,17 +11,20 @@ $sunset = (new DateTime())->setTimestamp($sunInfo['sunset']);
 $sunriseEnd = (new DateTime())->setTimestamp($sunInfo['sunrise'] + 1800); // Sunrise lasts for 30 minutes
 $sunsetStart = (new DateTime())->setTimestamp($sunInfo['sunset'] - 1800); // Sunset starts 30 minutes before actual sunset
 
+$message = '';
     
 if ($currentDateTime >= $sunrise && $currentDateTime <= $sunriseEnd) {
     $yee = new Yeelight("192.168.1.14", 55443);
     $yee->set_power('off');
     $yee->commit();
     $yee->disconnect();
+    $message = ' sunrise';
 } elseif ($currentDateTime >= $sunsetStart && $currentDateTime <= $sunset) {
     $yee = new Yeelight("192.168.1.14", 55443);
     $yee->set_power('on');
     $yee->commit();
     $yee->disconnect();
+    $message = ' sunset';
 }
 
 $filename = 'log.txt';
@@ -33,9 +36,9 @@ if (!file_exists($filename)) {
 
 if ($file) {
     $current_time = date('d-m-Y H:i:s');
-    fwrite($file, $current_time . " - New log entry\n");
+    fwrite($file, $current_time . $message . " - New log entry\n");
     fclose($file);
-    echo $current_time . " - New log entry\n";
+    echo $current_time . $message . " - New log entry\n";
 } else {
     echo "Failed to open the file.";
 }
