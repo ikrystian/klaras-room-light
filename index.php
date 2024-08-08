@@ -24,3 +24,19 @@ if ($currentDateTime >= $sunrise && $currentDateTime <= $sunriseEnd) {
 } else {
     echo "It is neither sunrise nor sunset in Lublin, Poland.";
 }
+
+$filename = 'log.txt';
+if (!file_exists($filename)) {
+    $file = fopen($filename, 'w');
+} else {
+    $file = fopen($filename, 'a');
+}
+
+if ($file) {
+    $current_time = date('d-m-Y H:i:s');
+    fwrite($file, $current_time . " - New log entry\n");
+    fclose($file);
+    echo "Log entry written successfully.";
+} else {
+    echo "Failed to open the file.";
+}
