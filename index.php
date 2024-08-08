@@ -15,13 +15,13 @@ $message = '';
     
 if ($currentDateTime >= $sunrise && $currentDateTime <= $sunriseEnd) {
     $yee = new Yeelight("192.168.1.14", 55443);
-    $yee->set_power('off');
+    $yee->set_power('on');
     $yee->commit();
     $yee->disconnect();
     $message = ' sunrise';
 } elseif ($currentDateTime >= $sunsetStart && $currentDateTime <= $sunset) {
     $yee = new Yeelight("192.168.1.14", 55443);
-    $yee->set_power('on');
+    $yee->set_power('off');
     $yee->commit();
     $yee->disconnect();
     $message = ' sunset';
