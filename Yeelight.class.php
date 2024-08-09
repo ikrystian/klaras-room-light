@@ -1,8 +1,22 @@
 <?php
 class Yeelight {
 	private $jobs = array();
+    /**
+     * @var mixed
+     */
+    private $ip;
+    /**
+     * @var mixed
+     */
+    private $port;
+    /**
+     * @var false|resource
+     */
+    private $fp;
+    private $errno;
+    private $errstr;
 
-	public function __construct($ip, $port) {
+    public function __construct($ip, $port) {
 		$this->ip = $ip;
 		$this->port = $port;
 		if (!$this->verifyConnection()) throw new Exception("Failed connecting to Yeelight device.");
